@@ -1,8 +1,5 @@
 name: Release Helm Chart
 
-on:
-  create
-
 jobs:
   chart-release:
     runs-on: ubuntu-latest
