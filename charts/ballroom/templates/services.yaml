@@ -1,0 +1,43 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-headless
+  namespace: {{ .Release.Namespace }}
+spec:
+  selector:
+    app: {{ .Release.Name }}
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 6901
+      name: web
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+      name: mpc
+  clusterIP: None
+---
+{{- range $i, $e := until (.Values.demo.players | int) }}
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: {{ $.Release.Name }}
+  name: {{ $.Release.Name }}-{{ $i }}
+  namespace: {{ $.Release.Namespace }}
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 6901
+    name: web
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+    name: mpc
+  selector:
+    statefulset.kubernetes.io/pod-name: {{ $.Release.Name }}-{{ $i }}
+  type: ClusterIP
+---
+{{- end }}
