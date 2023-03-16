@@ -5,7 +5,7 @@ on:
       - main
 jobs:
   semantic-release:
-    name: Release
+    name: semantic-release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -30,6 +30,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
   chart-release:
+    name: chart-release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
