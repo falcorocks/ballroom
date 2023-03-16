@@ -1,5 +1,4 @@
 name: Release Helm Chart
-# this should run only for tags
 
 on:
   push:
