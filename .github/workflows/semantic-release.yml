@@ -18,6 +18,12 @@ jobs:
           node-version: "lts/*"
       - name: Install dependencies
         run: npm install -g semantic-release @semantic-release/git @semantic-release/changelog @semantic-release/exec
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      - name: Install tbump
+        run: pip install tbump
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
