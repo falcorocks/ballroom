@@ -1,7 +1,9 @@
 name: helm-release
 on:
-  release:
-    types: [created]
+  workflow_run:
+    workflows: [semantic-release]
+    types:
+      - completed
 jobs:
   chart-release:
     name: chart-release
