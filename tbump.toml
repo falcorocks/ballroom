@@ -13,3 +13,5 @@ tag_template = "v{new_version}"
 src = "charts/ballroom/Chart.yaml"
 [[file]]
 src = "README.md"
+[[file]]
+src = "charts/ballroom/templates/statefulset.yaml
