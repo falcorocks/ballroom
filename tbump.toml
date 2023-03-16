@@ -1,0 +1,13 @@
+[version]
+current = "0.1.1"
+
+regex = '''
+\d+\.\d+\.\d+(-(.*))?
+'''
+
+[git]
+message_template = "Bump to {new_version}"
+tag_template = "v{new_version}"
+
+[[file]]
+src = "charts/ballroom/Chart.yaml"
