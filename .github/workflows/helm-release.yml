@@ -1,6 +1,6 @@
 name: helm-release
 on:
-  create
+  push
 jobs:
   chart-release:
     name: chart-release
