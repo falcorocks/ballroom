@@ -1,8 +1,6 @@
 name: helm-release
 on:
-  push:
-    tags:
-      - '*'
+  create
 jobs:
   chart-release:
     name: chart-release
