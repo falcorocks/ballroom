@@ -1,5 +1,8 @@
 name: Release Helm Chart
-
+on:
+  push:
+    branches:
+      - main
 jobs:
   chart-release:
     runs-on: ubuntu-latest
