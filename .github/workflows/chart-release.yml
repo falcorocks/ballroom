@@ -1,9 +1,10 @@
-name: Release Charts
+name: Release Helm Chart
+# this should run only for tags
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
 
 jobs:
   chart-release:
