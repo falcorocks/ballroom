@@ -1,6 +1,7 @@
 name: helm-release
 on:
-  push
+  release:
+    types: [published]
 jobs:
   chart-release:
     name: chart-release
