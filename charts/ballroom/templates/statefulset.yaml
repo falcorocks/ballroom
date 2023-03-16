@@ -1,0 +1,65 @@
+{{- $value := .Values.demo.game -}}
+{{- $acceptableValues := list "sasse" "sa" "lp" "srp" -}}
+{{ if not (has $value $acceptableValues) }}
+  {{- $errorMessage := printf "Error: Invalid value for yourVariable. Value must be one of: %s" $acceptableValues -}}
+  {{- fail $errorMessage -}}
+{{- end }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: {{ .Release.Name }}
+  name: {{ .Release.Name }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  replicas: {{ .Values.demo.players }}
+  serviceName: {{ .Release.Name }}-headless
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+      - image: {{ .Values.image.registry }}/{{.Values.demo.game }}:{{ .Values.image.tag }}
+        name: {{ .Release.Name }}
+        imagePullPolicy: Always
+        volumeMounts: #TODO: template and move to values.yaml
+          - name: cm-startup-vol
+            mountPath: "/scripts"
+            readOnly: true
+        ports: #TODO: template and move to values.yaml
+          - containerPort: 6901
+            name: web
+          - containerPort: 8080
+            name: mpc
+        env:
+          # TODO: template and move all to values.yaml
+          - name: VNC_PASSWORDLESS
+            value: 'true'
+          - name: DEMO_NAME
+            value: {{ .Values.demo.game }}
+          - name: PLAYER_SUBDOMAIN_PREFIX
+            value: {{ .Release.Name }}
+          - name: PLAYER_DOMAIN
+            value: {{ .Release.Name }}-headless.{{ .Release.Namespace }}
+          - name: PLAYER_PORT
+            value: {{ .Values.demo.port | quote }}
+          - name: AMOUNT_PLAYERS
+            value: {{ .Values.demo.players | quote }}
+        resources: # TODO: template and move all to values.yaml
+          requests:
+            cpu: "250m"
+            memory: "256Mi"
+          limits:
+            cpu: "2000m"
+            memory: "512Mi"
+        args: ["-d","--wait","open","/headless/Desktop/firefox.desktop"] #TODO?
+      imagePullSecrets:
+        - name: {{ .Release.Name }}-regcred
+      volumes:
+        - name: cm-startup-vol
+          configMap:
+            name: {{ .Release.Name }}-cm-startup
