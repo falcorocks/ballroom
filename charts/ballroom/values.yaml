@@ -1,19 +1,45 @@
 image:
   registry: consol/debian-xfce-vnc
   tag: v2.0.1@sha256:108675d167724b9f0ecbda8464ff66c8fbe42ccd0eb5647c4f8fc8205a9c136d
+  regcred:
+    enabled: false
+    dockerconfigjson: ""
 
 ingress:
   enabled: false
-  domain: "test.com"
   annotations: {}
-  sessionID: "12345"
+  host:
+    instancePrefix: "party"
+    sessionID: "12345"
+    domain: "test.com"
   vanilla:
     enabled: true
   istio:
     enabled: false
     credentialName: "your-secret-name-goes-here"
 
-demo:
-  players: 3
-  game: sasse #TODO: drop?
-  port: "8080"
+pod:
+  replicas: 3
+  resources:
+    requests:
+      cpu: "250m"
+      memory: "256Mi"
+    limits:
+      cpu: "2000m"
+      memory: "512Mi"
+
+service: #TODO: improve templating
+  headless:
+    clusterIP: None
+  ports:
+    protocol: TCP
+    targetPort: 6901
+    port: 80
+    name: web
+
+configMapVolume: #TODO: improve templating
+  enabled: false
+  name: your-volume
+  mountPath: "/your-path"
+  readOnly: true
+  configMapName: your-configmap

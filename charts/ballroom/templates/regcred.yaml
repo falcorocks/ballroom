@@ -1,0 +1,10 @@
+{{ if .Values.image.regcred.enabled }}
+apiVersion: v1
+data:
+  .dockerconfigjson: {{ .Values.image.regcred.dockerconfigjson }}
+kind: Secret
+metadata:
+  name: {{ .Release.Name }}-regcred
+  namespace: {{ .Release.Namespace }}
+type: kubernetes.io/dockerconfigjson
+{{ end }}

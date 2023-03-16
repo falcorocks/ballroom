@@ -1,9 +1,3 @@
-{{- $value := .Values.demo.game -}}
-{{- $acceptableValues := list "sasse" "sa" "lp" "srp" -}}
-{{ if not (has $value $acceptableValues) }}
-  {{- $errorMessage := printf "Error: Invalid value for yourVariable. Value must be one of: %s" $acceptableValues -}}
-  {{- fail $errorMessage -}}
-{{- end }}
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
@@ -12,7 +6,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  replicas: {{ .Values.demo.players }}
+  pod.replicas: {{ .Values.pod.replicas }}
   serviceName: {{ .Release.Name }}-headless
   selector:
     matchLabels:
@@ -23,43 +17,32 @@ spec:
         app: {{ .Release.Name }}
     spec:
       containers:
-      - image: {{ .Values.image.registry }}/{{.Values.demo.game }}:{{ .Values.image.tag }}
+      - image: {{ .Values.image.registry }}:{{ .Values.image.tag }}
         name: {{ .Release.Name }}
         imagePullPolicy: Always
-        volumeMounts: #TODO: template and move to values.yaml
-          - name: cm-startup-vol
-            mountPath: "/scripts"
-            readOnly: true
-        ports: #TODO: template and move to values.yaml
-          - containerPort: 6901
-            name: web
-          - containerPort: 8080
-            name: mpc
-        env:
-          # TODO: template and move all to values.yaml
-          - name: VNC_PASSWORDLESS
-            value: 'true'
-          - name: DEMO_NAME
-            value: {{ .Values.demo.game }}
-          - name: PLAYER_SUBDOMAIN_PREFIX
-            value: {{ .Release.Name }}
-          - name: PLAYER_DOMAIN
-            value: {{ .Release.Name }}-headless.{{ .Release.Namespace }}
-          - name: PLAYER_PORT
-            value: {{ .Values.demo.port | quote }}
-          - name: AMOUNT_PLAYERS
-            value: {{ .Values.demo.players | quote }}
+        {{ if .Values.configMapVolume.enabled }}
+        volumeMounts:
+          - name: {{ .Values.configMapVolume.name }}
+            mountPath: {{ .Values.configMapVolume.mountPath }}
+            readOnly: {{ .Values.configMapVolume.readOnly }}
+        {{ end }}
+        ports:
+          - containerPort: {{ .Values.service.ports.targetPort }}
+            name: {{ .Values.service.ports.name }}
+        # TODO: allow user to add arbitrary amount of env values
         resources: # TODO: template and move all to values.yaml
           requests:
-            cpu: "250m"
-            memory: "256Mi"
+            cpu: {{ .Values.pod.requests.cpu }}
+            memory: {{ .Values.pod.requests.memory }}
           limits:
-            cpu: "2000m"
-            memory: "512Mi"
-        args: ["-d","--wait","open","/headless/Desktop/firefox.desktop"] #TODO?
+            cpu: {{ .Values.pod.limits.cpu }}
+            memory: {{ .Values.pod.limits.memory }}
+      {{ if .Values.image.regcred.enabled }}
       imagePullSecrets:
         - name: {{ .Release.Name }}-regcred
+      {{ end }}
+      {{ if .Values.configMapVolume.enabled }}
       volumes:
-        - name: cm-startup-vol
+        - name: {{ .Values.configMapVolume.name }}
           configMap:
-            name: {{ .Release.Name }}-cm-startup
+            name: {{ .Values.configMapVolume.configMapName }}
