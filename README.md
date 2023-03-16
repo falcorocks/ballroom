@@ -16,7 +16,7 @@ ballroom` to see the charts.
 
 To install the ballroom chart:
 
-`helm install my-ballroom ballroom/ballroom --version 0.2.2`
+`helm install my-ballroom ballroom/ballroom --version 0.2.3`
 
 To uninstall the chart:
 
