@@ -36,14 +36,13 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
-      - name: package chart
-        run: ./cr package charts/ballroom
       - name: run chart releaser
         run: |
           repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
           owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
           exists=0
           if [[ $exists != "200" ]]; then
+            ./cr package charts/ballroom
             # upload chart to github releases
             ./cr upload \
                 --owner "$owner" \
