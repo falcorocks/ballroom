@@ -24,12 +24,12 @@ jobs:
           python-version: '3.10'
       - name: Install tbump
         run: pip install tbump
-      - name: semantic release #will create a tag. can it be skipped?
+      - name: semantic release dry run
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npx semantic-release
-      - name: Run chart-releaser #will chart releaser create a tag? can it be configured to not do it?
-        uses: helm/chart-releaser-action@v1.5.0
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        run: npx semantic-release -d --branches main # does exec block run?
+      # - name: Run chart-releaser #will chart releaser create a tag? can it be configured to not do it?
+      #   uses: helm/chart-releaser-action@v1.5.0
+      #   env:
+      #     CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
