@@ -49,7 +49,7 @@ jobs:
                 --git-repo "$repo" \
                 --token "${{ secrets.GITHUB_TOKEN }}"
             echo "update index"
-            mkdir ./cr-index
+            mkdir .cr-index
             # Update index and push to github pages
             ./cr index \
                 --owner "$owner" \
