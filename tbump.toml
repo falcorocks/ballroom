@@ -1,5 +1,5 @@
 [version]
-current = "0.2.20"
+current = "0.2.21"
 
 regex = '''
 \d+\.\d+\.\d+(-(.*))?
