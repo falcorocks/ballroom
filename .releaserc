@@ -1,15 +1,6 @@
 {
-  "tagFormat": "sr-${version}",
-  "branches": ["+([0-9])?(.{+([0-9]),x}).x", "master", "main", {"name": "beta", "prerelease": true}],
+  "tagFormat": "${version}",
   "plugins": [
-    ["@semantic-release/commit-analyzer", {
-      "preset": "angular",
-      "releaseRules": [
-        {"type": "docs", "release": "patch"},
-        {"type": "refactor", "release": "patch"},
-        {"type": "test", "release": "patch"},
-        {"scope": "no-release", "release": "patch"}
-    ]}],
     ["@semantic-release/exec", {
       "prepareCmd": "tbump ${nextRelease.version} --only-patch --non-interactive"
     }],
