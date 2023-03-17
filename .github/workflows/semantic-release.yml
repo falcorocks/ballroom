@@ -31,8 +31,6 @@ jobs:
           curl -sSLo cr.tar.gz "https://github.com/helm/chart-releaser/releases/download/v1.5.0/chart-releaser_1.5.0_linux_amd64.tar.gz"
           tar -xzf cr.tar.gz
           rm -f cr.tar.gz
-          repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
-          owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
       - name: semantic release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,6 +40,8 @@ jobs:
         run: ./cr package charts/ballroom
       - name: run chart releaser
         run: |
+          repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
+          owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
           exists=0
           if [[ $exists != "200" ]]; then
             # upload chart to github releases
