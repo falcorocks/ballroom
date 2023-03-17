@@ -4,6 +4,6 @@ name: ballroom
 description: multi party stateful set deployment with related services
 
 type: application
-version: 0.2.26
+version: 0.2.27
 
-appVersion: "0.2.26"
+appVersion: "0.2.27"
