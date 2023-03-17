@@ -47,3 +47,4 @@ spec:
         - name: {{ .Values.configMapVolume.name }}
           configMap:
             name: {{ .Values.configMapVolume.configMapName }}
+      {{ end }}
