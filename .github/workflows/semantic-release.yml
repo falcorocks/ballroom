@@ -29,10 +29,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
-      - name: Checkout again
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Run chart-releaser #will chart releaser create a tag? can it be configured to not do it?
         uses: helm/chart-releaser-action@v1.5.0
         env:
