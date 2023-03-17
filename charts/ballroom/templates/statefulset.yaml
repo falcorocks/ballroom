@@ -3,7 +3,7 @@ kind: StatefulSet
 metadata:
   labels:
     app: {{ .Release.Name }}
-    version: 0.2.24
+    version: 0.2.25
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
