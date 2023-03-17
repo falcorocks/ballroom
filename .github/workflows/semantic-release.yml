@@ -38,13 +38,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
+      - name: package chart
+        run: ./cr package ${{ inputs.chart_path }}/$repo
       - name: run chart releaser
         run: |
           exists=0
           if [[ $exists != "200" ]]; then
-            echo "Creating release..."
-            # package chart
-            ./cr package ${{ inputs.chart_path }}/$repo
             # upload chart to github releases
             ./cr upload \
                 --owner "$owner" \
