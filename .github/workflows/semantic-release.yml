@@ -38,6 +38,8 @@ jobs:
         run: npx semantic-release
       - name: run chart releaser
         run: |
+          git config --global user.email "chart-releaser-bot@bot.com"
+          git config --global user.name "Chart Releaser"
           repo=$(cut -d '/' -f 2 <<< "$GITHUB_REPOSITORY")
           owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
           exists=0
