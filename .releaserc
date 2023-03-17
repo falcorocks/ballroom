@@ -1,5 +1,5 @@
 {
-  "tagFormat": "${version}",
+  "tagFormat": "sr-${version}",
   "branches": ["+([0-9])?(.{+([0-9]),x}).x", "master", "main", {"name": "beta", "prerelease": true}],
   "plugins": [
     ["@semantic-release/commit-analyzer", {
@@ -11,7 +11,8 @@
         {"scope": "no-release", "release": "patch"}
     ]}],
     ["@semantic-release/exec", {
-      "prepareCmd": "tbump ${nextRelease.version} --only-patch --non-interactive"
+      "prepareCmd": "tbump ${nextRelease.version} --only-patch --non-interactive",
+      "successCmd": ""
     }],
     ["@semantic-release/git", {
         "assets": [
