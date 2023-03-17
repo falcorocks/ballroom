@@ -39,7 +39,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
       - name: package chart
-        run: ./cr package ${{ inputs.chart_path }}/$repo
+        run: ./cr package charts/ballroom
       - name: run chart releaser
         run: |
           exists=0
