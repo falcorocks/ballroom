@@ -54,7 +54,6 @@ jobs:
                 --owner "$owner" \
                 --git-repo "$repo" \
                 --token "${{ secrets.GITHUB_TOKEN }}" \
-                --charts-repo ${{ inputs.chart_url }} \
                 --push
           else
             echo "Release already exists"
