@@ -11,8 +11,7 @@
         {"scope": "no-release", "release": "patch"}
     ]}],
     ["@semantic-release/exec", {
-      "prepareCmd": "tbump ${nextRelease.version} --only-patch --non-interactive",
-      "successCmd": ""
+      "prepareCmd": "tbump ${nextRelease.version} --only-patch --non-interactive"
     }],
     ["@semantic-release/git", {
         "assets": [
