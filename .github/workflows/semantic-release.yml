@@ -55,6 +55,7 @@ jobs:
                 --owner "$owner" \
                 --git-repo "$repo" \
                 --token "${{ secrets.GITHUB_TOKEN }}" \
+                -i .cr-index/index.yaml \
                 --push
           else
             echo "Release already exists"
