@@ -7,7 +7,7 @@ metadata:
   name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  pod.replicas: {{ .Values.pod.replicas }}
+  replicas: {{ .Values.pod.replicas }}
   serviceName: {{ .Release.Name }}-headless
   selector:
     matchLabels:
