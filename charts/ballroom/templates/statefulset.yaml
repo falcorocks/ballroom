@@ -33,11 +33,11 @@ spec:
         # TODO: allow user to add arbitrary amount of env values
         resources: # TODO: template and move all to values.yaml
           requests:
-            cpu: {{ .Values.pod.requests.cpu }}
-            memory: {{ .Values.pod.requests.memory }}
+            cpu: {{ .Values.pod.resources.requests.cpu }}
+            memory: {{ .Values.pod.resources.requests.memory }}
           limits:
-            cpu: {{ .Values.pod.limits.cpu }}
-            memory: {{ .Values.pod.limits.memory }}
+            cpu: {{ .Values.pod.resources.limits.cpu }}
+            memory: {{ .Values.pod.resources.limits.memory }}
       {{ if .Values.image.regcred.enabled }}
       imagePullSecrets:
         - name: {{ .Release.Name }}-regcred

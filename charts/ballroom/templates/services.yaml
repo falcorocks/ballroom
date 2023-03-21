@@ -24,10 +24,10 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   ports:
-    - protocol: {{ .Values.service.ports.protocol }}
-      port: {{ .Values.service.ports.port }}
-      targetPort: {{ .Values.service.ports.targetPort }}
-      name: {{ .Values.service.ports.name }}
+    - protocol: {{ $.Values.service.ports.protocol }}
+      port: {{ $.Values.service.ports.port }}
+      targetPort: {{ $.Values.service.ports.targetPort }}
+      name: {{ $.Values.service.ports.name }}
   selector:
     statefulset.kubernetes.io/pod-name: {{ $.Release.Name }}-{{ $i }}
   type: ClusterIP
