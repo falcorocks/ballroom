@@ -13,6 +13,9 @@ Optionally:
 # add helm repository from project github pages
 helm repo add ballroom https://ballroom.github.io/helm-charts
 
+# fetch chart updates
+helm repo update
+
 # install chart
 helm install my-ballroom ballroom/ballroom
 ```
