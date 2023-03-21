@@ -36,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
-      - name: run chart releaser
+      - name: run chart releaser #TODO: chart releaser should not run if semantic-release does not want to release a new version
         run: |
           git config --global user.email "chart-releaser-bot@bot.com"
           git config --global user.name "Chart Releaser"
