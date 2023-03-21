@@ -15,7 +15,9 @@
     }],
     ["@semantic-release/git", {
         "assets": [
-            "**/*"
+            "charts/ballroom/templates/statefulset.yaml",
+            "charts/ballroom/Chart.yaml",
+            "README.md"
         ],
         "message": "chore(release): ${nextRelease.version}"
     }]
