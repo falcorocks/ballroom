@@ -1,5 +1,5 @@
 [version]
-current = "0.2.34"
+current = "0.2.35"
 
 regex = '''
 \d+\.\d+\.\d+(-(.*))?
@@ -13,3 +13,5 @@ tag_template = "v{new_version}"
 src = "charts/ballroom/Chart.yaml"
 [[file]]
 src = "charts/ballroom/templates/statefulset.yaml"
+[[file]]
+src = "README.md"
