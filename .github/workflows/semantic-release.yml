@@ -28,9 +28,9 @@ jobs:
         run: tbump 999.999.999 --only-patch --non-interactive --dry-run
       - name: Prepare Chart Releaser
         run: |
-          curl -sSLo cr.tar.gz "https://github.com/helm/chart-releaser/releases/download/v1.5.0/chart-releaser_1.5.0_linux_amd64.tar.gz"
-          tar -xzf cr.tar.gz
-          rm -f cr.tar.gz
+          mkdir cr
+          curl -sSLo cr/cr.tar.gz "https://github.com/helm/chart-releaser/releases/download/v1.5.0/chart-releaser_1.5.0_linux_amd64.tar.gz"
+          tar -xzf cr/cr.tar.gz -C cr
       - name: semantic release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -44,16 +44,16 @@ jobs:
           owner=$(cut -d '/' -f 1 <<< "$GITHUB_REPOSITORY")
           exists=0
           if [[ $exists != "200" ]]; then
-            ./cr package charts/ballroom
+            ./cr/cr package charts/ballroom
             # upload chart to github releases
-            ./cr upload \
+            ./cr/cr upload \
                 --owner "$owner" \
                 --git-repo "$repo" \
                 --token "${{ secrets.GITHUB_TOKEN }}"
             echo "update index"
             mkdir .cr-index
             # Update index and push to github pages
-            ./cr index \
+            ./cr/cr index \
                 --owner "$owner" \
                 --git-repo "$repo" \
                 --token "${{ secrets.GITHUB_TOKEN }}" \
