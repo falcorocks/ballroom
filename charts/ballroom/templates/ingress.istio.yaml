@@ -51,7 +51,7 @@ spec:
     route:
     - destination:
         port:
-          number: 80
+          number: {{ $.Values.service.ports.port }}
         host: {{ $.Release.Name }}-{{ $i }}
 ---
 {{ end }}
