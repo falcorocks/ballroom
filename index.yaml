@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   ballroom:
   - apiVersion: v2
+    appVersion: 0.3.3
+    created: "2023-03-23T13:59:57.907979443Z"
+    description: multi party stateful set deployment with related services
+    digest: b513b78b0ab25581906ac2e928c4c454e185f2f448390a3b34144672f3e99d74
+    name: ballroom
+    type: application
+    urls:
+    - https://github.com/falcorocks/ballroom/releases/download/ballroom-0.3.3/ballroom-0.3.3.tgz
+    version: 0.3.3
+  - apiVersion: v2
     appVersion: 0.3.2
     created: "2023-03-23T13:51:58.826737285Z"
     description: multi party stateful set deployment with related services
@@ -141,4 +151,4 @@ entries:
     urls:
     - https://github.com/falcorocks/ballroom/releases/download/ballroom-0.1.0/ballroom-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-23T13:51:58.82708761Z"
+generated: "2023-03-23T13:59:57.908075144Z"
