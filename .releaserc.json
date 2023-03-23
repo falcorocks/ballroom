@@ -17,7 +17,8 @@
         "assets": [
             "charts/ballroom/templates/statefulset.yaml",
             "charts/ballroom/Chart.yaml",
-            "README.md"
+            "README.md",
+            "tbump.toml"
         ],
         "message": "chore(release): ${nextRelease.version}"
     }]
