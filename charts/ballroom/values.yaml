@@ -20,6 +20,7 @@ ingress:
 
 pod:
   replicas: 3
+  extraEnvVarsCM: ""
   resources:
     requests:
       cpu: "250m"

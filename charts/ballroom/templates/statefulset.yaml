@@ -21,6 +21,11 @@ spec:
       - image: {{ .Values.image.registry }}:{{ .Values.image.tag }}
         name: {{ .Release.Name }}
         imagePullPolicy: Always
+        {{- if .Values.extraEnvVarsCM }}
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.extraEnvVarsCM }}
+          {{- end }}
         {{ if .Values.configMapVolume.enabled }}
         volumeMounts:
           - name: {{ .Values.configMapVolume.name }}
