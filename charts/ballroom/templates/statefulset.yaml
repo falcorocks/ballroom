@@ -22,10 +22,10 @@ spec:
         name: {{ .Release.Name }}
         imagePullPolicy: Always
         {{- if .Values.pod.extraEnvVarsCM }}
-          envFrom:
-            - configMapRef:
-                name: {{ .Values.pod.extraEnvVarsCM }}
-          {{- end }}
+        envFrom:
+          - configMapRef:
+              name: {{ .Values.pod.extraEnvVarsCM }}
+        {{- end }}
         {{ if .Values.configMapVolume.enabled }}
         volumeMounts:
           - name: {{ .Values.configMapVolume.name }}
