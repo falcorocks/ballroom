@@ -21,10 +21,10 @@ spec:
       - image: {{ .Values.image.registry }}:{{ .Values.image.tag }}
         name: {{ .Release.Name }}
         imagePullPolicy: Always
-        {{- if .Values.extraEnvVarsCM }}
+        {{- if .Values.pod.extraEnvVarsCM }}
           envFrom:
             - configMapRef:
-                name: {{ .Values.extraEnvVarsCM }}
+                name: {{ .Values.pod.extraEnvVarsCM }}
           {{- end }}
         {{ if .Values.configMapVolume.enabled }}
         volumeMounts:
