@@ -28,10 +28,14 @@ metadata:
   namespace: {{ $.Release.Namespace }}
 spec:
   ports:
-    - protocol: {{ $.Values.service.ports.protocol }}
-      port: {{ $.Values.service.ports.port }}
-      targetPort: {{ $.Values.service.ports.targetPort }}
-      name: {{ $.Values.service.ports.name }}
+    - protocol: {{ $.Values.service.ports.first.protocol }}
+      port: {{ $.Values.service.ports.first.port }}
+      targetPort: {{ $.Values.service.ports.first.targetPort }}
+      name: {{ $.Values.service.ports.first.name }}
+    - protocol: {{ $.Values.service.ports.second.protocol }}
+      port: {{ $.Values.service.ports.second.port }}
+      targetPort: {{ $.Values.service.ports.second.targetPort }}
+      name: {{ $.Values.service.ports.second.name }}
   selector:
     statefulset.kubernetes.io/pod-name: {{ $.Release.Name }}-{{ $i }}
   type: ClusterIP
