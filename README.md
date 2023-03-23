@@ -17,5 +17,5 @@ helm repo add ballroom https://ballroom.github.io/helm-charts
 helm repo update
 
 # install chart
-helm install my-ballroom ballroom/ballroom --version 0.3.0
+helm install my-ballroom ballroom/ballroom --version 0.3.1
 ```
