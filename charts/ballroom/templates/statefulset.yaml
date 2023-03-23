@@ -33,8 +33,10 @@ spec:
             readOnly: {{ .Values.configMapVolume.readOnly }}
         {{ end }}
         ports:
-          - containerPort: {{ .Values.service.ports.targetPort }}
-            name: {{ .Values.service.ports.name }}
+          - containerPort: {{ .Values.service.ports.first.targetPort }}
+            name: {{ .Values.service.ports.first.name }}
+          - containerPort: {{ .Values.service.ports.second.targetPort }}
+            name: {{ .Values.service.ports.second.name }}
         # TODO: allow user to add arbitrary amount of env values
         resources: # TODO: template and move all to values.yaml
           requests:

@@ -51,7 +51,7 @@ spec:
     route:
     - destination:
         port:
-          number: {{ $.Values.service.ports.port }}
+          number: {{ $.Values.service.ports.first.port }}
         host: {{ $.Release.Name }}-{{ $i }}
 ---
 {{ end }}

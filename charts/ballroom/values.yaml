@@ -33,10 +33,16 @@ service: #TODO: improve templating
   headless:
     clusterIP: None
   ports:
-    protocol: TCP
-    targetPort: 6901
-    port: 80
-    name: web
+    first:
+      protocol: TCP
+      targetPort: 6901
+      port: 80
+      name: web
+    second:
+      protocol: TCP
+      targetPort: 8080
+      port: 8080
+      name: somethingelse
 
 configMapVolume: #TODO: improve templating
   enabled: false
